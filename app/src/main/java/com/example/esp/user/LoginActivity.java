@@ -47,19 +47,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 LoginResult result = response.body();
-                if (result.success()) {
+                if (result != null && result.success()) {
                     //保存服务器返回的session
                     CurrentUser.sessionId = result.sessionID;
                     startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
                 } else {
-                    Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登录失败:" + (result != null ? result.errmsg : ""), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResult> call, Throwable t) {
                 //请求失败
-                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "登录失败:" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
