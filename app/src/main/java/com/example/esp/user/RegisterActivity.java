@@ -30,13 +30,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         findViewById(R.id.btn_register).setOnClickListener(this);
+        findViewById(R.id.header_back).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        String username = ((TextView)findViewById(R.id.username)).getText().toString();
-        String password = ((TextView)findViewById(R.id.password)).getText().toString();
-        register(username, password);
+        switch (view.getId()) {
+            case R.id.btn_register:
+                String username = ((TextView)findViewById(R.id.username)).getText().toString();
+                String password = ((TextView)findViewById(R.id.password)).getText().toString();
+                register(username, password);
+                break;
+            case R.id.header_back:
+                finish();
+                break;
+        }
     }
 
     /**
@@ -52,18 +60,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Api.create(UserService.class).register(param).enqueue(new Callback<RegisterResult>() {
             @Override
             public void onResponse(Call<RegisterResult> call, Response<RegisterResult> response) {
-                //请求成功
-                Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                //跳到登录界面
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                finish();
+                RegisterResult result = response.body();
+                if (result != null && result.success()) {
+                    //请求成功
+                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                    //跳到登录界面
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    finish();
+                } else {
+                    //请求失败
+                    Toast.makeText(RegisterActivity.this, "注册失败:" + (result != null ? result.errmsg : ""), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<RegisterResult> call, Throwable t) {
                 //请求失败
-                Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
-                Log.e("test",t.getMessage());
+                Toast.makeText(RegisterActivity.this, "注册失败:" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

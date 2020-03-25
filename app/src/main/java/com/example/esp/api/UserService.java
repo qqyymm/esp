@@ -3,7 +3,7 @@ package com.example.esp.api;
 import com.example.esp.api.param.ChangepasswordParam;
 import com.example.esp.api.param.DevicebindParam;
 import com.example.esp.api.param.DevicecontrolParam;
-import com.example.esp.api.param.DevicelistParam;
+import com.example.esp.api.param.DeviceListParam;
 import com.example.esp.api.param.DeviceqryParam;
 import com.example.esp.api.param.DeviceremoveParam;
 import com.example.esp.api.param.DevicerenewtokenParam;
@@ -11,7 +11,7 @@ import com.example.esp.api.param.LoginParam;
 import com.example.esp.api.param.RegisterParam;
 import com.example.esp.api.result.ApiResult;
 import com.example.esp.api.result.DevicecontrolResult;
-import com.example.esp.api.result.DevicelistResult;
+import com.example.esp.api.result.DeviceListResult;
 import com.example.esp.api.result.DeviceqryResult;
 import com.example.esp.api.result.DevicerenewtokenResult;
 import com.example.esp.api.result.LoginResult;
@@ -61,7 +61,7 @@ public interface UserService {
      * 状态清单查询
      */
     @POST("devicelist")
-    Call<DevicelistResult> devicelist(@Body DevicelistParam param);
+    Call<DeviceListResult> devicelist(@Body DeviceListParam param);
 
     /**
      * 状态单个查询
