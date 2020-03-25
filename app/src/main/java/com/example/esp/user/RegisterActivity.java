@@ -30,13 +30,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         findViewById(R.id.btn_register).setOnClickListener(this);
+        findViewById(R.id.header_back).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        String username = ((TextView)findViewById(R.id.username)).getText().toString();
-        String password = ((TextView)findViewById(R.id.password)).getText().toString();
-        register(username, password);
+        switch (view.getId()) {
+            case R.id.btn_register:
+                String username = ((TextView)findViewById(R.id.username)).getText().toString();
+                String password = ((TextView)findViewById(R.id.password)).getText().toString();
+                register(username, password);
+                break;
+            case R.id.header_back:
+                finish();
+                break;
+        }
     }
 
     /**
