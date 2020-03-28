@@ -64,8 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (result != null && result.success()) {
                     //请求成功
                     Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                    //跳到登录界面
-                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    //回到上一页
                     finish();
                 } else {
                     //请求失败

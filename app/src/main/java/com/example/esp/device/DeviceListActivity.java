@@ -1,5 +1,6 @@
 package com.example.esp.device;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -35,6 +36,7 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
     private SmartRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private View headerBack;
+    private View headerAddDevice;
     private View listEmpty;
     private View listError;
     private View retry;
@@ -49,11 +51,13 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
         refreshLayout = findViewById(R.id.refresh);
         recyclerView = findViewById(R.id.device_list);
         headerBack = findViewById(R.id.header_back);
+        headerAddDevice = findViewById(R.id.header_add);
         listEmpty = findViewById(R.id.list_empty);
         listError = findViewById(R.id.list_error);
         retry = findViewById(R.id.retry);
 
         headerBack.setOnClickListener(this);
+        headerAddDevice.setOnClickListener(this);
         retry.setOnClickListener(this);
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -74,6 +78,9 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.header_back:
                 finish();
+                break;
+            case R.id.header_add:
+                startActivity(new Intent(this, AddDeviceActivity.class));
                 break;
             case R.id.retry:
                 loadDeviceList();

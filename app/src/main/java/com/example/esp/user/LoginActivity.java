@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         findViewById(R.id.btn_login).setOnClickListener(this);
-        findViewById(R.id.header_back).setOnClickListener(this);
+        findViewById(R.id.btn_register).setOnClickListener(this);
     }
 
     @Override
@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String password = ((TextView)findViewById(R.id.password)).getText().toString();
                 login(username, password);
                 break;
-            case R.id.header_back:
-                finish();
+            case R.id.btn_register:
+                startActivity(new Intent(this, RegisterActivity.class));
                 break;
         }
     }

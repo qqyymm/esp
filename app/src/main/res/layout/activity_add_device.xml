@@ -14,83 +14,73 @@
         app:layout_constraintRight_toRightOf="parent"
         style="@style/Header">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/header_back"-->
-<!--            style="@style/HeaderIcon"-->
-<!--            android:tint="#ffffff"-->
-<!--            android:src="@drawable/back"/>-->
+        <ImageView
+            android:id="@+id/header_back"
+            style="@style/HeaderIcon"
+            android:tint="#ffffff"
+            android:src="@drawable/back"/>
 
         <TextView
             style="@style/HeaderTitle"
-            android:text="用户登录"/>
+            android:text="添加设备"/>
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/portrait"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/portrait"
-        android:tint="#aaaaaa"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:text="请先绑定已有的WiFi"
+        android:textSize="16sp"
+        android:textColor="#555555"/>
 
     <LinearLayout
-        android:id="@+id/login_panel"
+        android:id="@+id/wifi_panel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/portrait"
+        app:layout_constraintTop_toBottomOf="@+id/tip"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="13dp"
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:background="#ffffff">
 
-        <EditText
-            android:id="@+id/username"
+        <TextView
+            android:id="@+id/wifi_ssid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Input"
-            android:hint="输入用户名"
-            android:text="13555555555"
-            android:drawableRight="@drawable/account"/>
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="kkl_test"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:drawableRight="@drawable/wifi"/>
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/wifi_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Input"
-            android:inputType="textPassword"
-            android:hint="输入密码"
-            android:text="111111"
-            android:drawableRight="@drawable/lock"/>
+            android:hint="输入WiFi密码"
+            android:drawableRight="@drawable/visibility"/>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_panel"
-        android:layout_margin="15dp"
-        android:text="立即注册"
-        android:textColor="@color/colorPrimary"/>
-
-
-    <TextView
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_confirm"
         style="@style/PrimaryButton.Large"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/wifi_panel"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_panel"
-        android:layout_marginTop="80dp"
-        android:text="登录"/>
+        android:layout_marginTop="40dp"
+        android:text="确定"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
