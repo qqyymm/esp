@@ -1,6 +1,6 @@
 package com.example.esp.api.param;
 
-public class DeviceremoveParam {
+public class DeviceRemoveParam {
     public String sessionID;
 
     public String devID;

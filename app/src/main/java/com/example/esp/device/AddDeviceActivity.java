@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,12 +50,20 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
         wifiSsidView = findViewById(R.id.wifi_ssid);
         wifiPasswordView = findViewById(R.id.wifi_password);
         confirmButton = findViewById(R.id.btn_confirm);
+        confirmButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.header_back:
+                finish();
+                break;
+            case R.id.btn_confirm:
+                //添加一个设备
+                //TODO 这里需要通过smart config来绑定设备,等联调
+                DeviceManger.getInstance().addRandomDevice();
+                Toast.makeText(this, "添加设备成功", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             default:

@@ -1,6 +1,6 @@
 package com.example.esp.api.param;
 
-public class ChangepasswordParam {
+public class ChangePasswordParam {
     public String userName;
 
     public String passWord;

@@ -28,6 +28,7 @@
         <activity android:name=".user.WelcomeActivity" android:screenOrientation="portrait"/>
         <activity android:name=".device.DeviceListActivity" android:screenOrientation="portrait"/>
         <activity android:name=".device.AddDeviceActivity" android:screenOrientation="portrait" />
+        <activity android:name=".device.DeviceDetailActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

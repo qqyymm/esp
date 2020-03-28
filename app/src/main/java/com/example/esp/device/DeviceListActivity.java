@@ -30,7 +30,9 @@ import retrofit2.Response;
 /**
  * Created by Ryan Hu on 2020/3/25.
  */
-public class DeviceListActivity extends AppCompatActivity implements View.OnClickListener {
+public class DeviceListActivity extends AppCompatActivity implements View.OnClickListener, DeviceListAdapter.Listener {
+
+    private static final int REQUEST_CODE_ADD_DEVICE = 1;
 
     private View loading;
     private SmartRefreshLayout refreshLayout;
@@ -80,12 +82,22 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.header_add:
-                startActivity(new Intent(this, AddDeviceActivity.class));
+                startActivityForResult(new Intent(this, AddDeviceActivity.class), REQUEST_CODE_ADD_DEVICE);
                 break;
             case R.id.retry:
                 loadDeviceList();
                 break;
             default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE_ADD_DEVICE:
+                loadDeviceList();
                 break;
         }
     }
@@ -122,24 +134,40 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
                 refreshLayout.finishRefresh(false);
             }
         });
+
         showLoading();
     }
 
+    /**
+     * 模拟设备列表请求
+     */
     private void loadMock() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                showError();
+//                showError();
+                List<Device> devices = DeviceManger.getInstance().getAllDevice();
+                if (devices == null || devices.size() == 0) {
+                    showEmpty();
+                } else {
+                    showList(devices);
+                }
+                refreshLayout.finishRefresh(true);
             }
         }, 3000);
+
         showLoading();
     }
 
     private void showLoading() {
-        loading.setVisibility(View.VISIBLE);
-        refreshLayout.setVisibility(View.GONE);
-        listEmpty.setVisibility(View.GONE);
-        listError.setVisibility(View.GONE);
+        if (adapter == null || adapter.getItemCount()== 0) {
+            loading.setVisibility(View.VISIBLE);
+            refreshLayout.setVisibility(View.GONE);
+            listEmpty.setVisibility(View.GONE);
+            listError.setVisibility(View.GONE);
+        } else {
+            refreshLayout.autoRefreshAnimationOnly();
+        }
     }
 
     private void showEmpty() {
@@ -167,8 +195,25 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
     private void bind(List<Device> deviceList) {
         if (adapter == null) {
             adapter = new DeviceListAdapter();
+            adapter.setListener(this);
             recyclerView.setAdapter(adapter);
         }
         adapter.update(deviceList);
+    }
+
+    @Override
+    public void onClickDevice(Device device) {
+        DeviceDetailActivity.start(this, device);
+    }
+
+    @Override
+    public void onDeleteDevice(Device device) {
+        //TODO 请求服务器，删除设备
+        boolean deleted = DeviceManger.getInstance().removeDevice(device.devID);
+        if (deleted) {
+            if (adapter != null) {
+                adapter.removeDevice(device.devID);
+            }
+        }
     }
 }

@@ -41,17 +41,75 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
         return deviceList != null ? deviceList.size() : 0;
     }
 
-    public static class DeviceViewHolder extends RecyclerView.ViewHolder {
+    public void removeDevice(String deviceId) {
+        for (int i = 0; i < deviceList.size(); i++) {
+            if (deviceId.equals(deviceList.get(i).devID)) {
+                deviceList.remove(i);
+                notifyItemRemoved(i);
+                return;
+            }
+        }
+    }
 
-        private TextView title;
+    public class DeviceViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView deviceName;
+        private TextView deviceType;
+        private TextView deviceStatus;
+        private View deleteButton;
 
         public DeviceViewHolder(View itemView){
             super(itemView);
-            title = itemView.findViewById(R.id.title);
+            deviceName = itemView.findViewById(R.id.device_name);
+            deviceType = itemView.findViewById(R.id.device_type);
+            deviceStatus = itemView.findViewById(R.id.device_status);
+            deleteButton = itemView.findViewById(R.id.btn_delete);
+            deleteButton.setOnClickListener(clickListener);
+            itemView.setOnClickListener(itemListener);
         }
 
         public void bind(Device device) {
-            title.setText(device.devName);
+            deviceName.setText(device.devName);
+            deviceType.setText(device.devType);
+            deviceStatus.setText(device.devStatus);
+            deleteButton.setTag(device);
+            itemView.setTag(device);
         }
+    }
+
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Object tag = v.getTag();
+            if (tag instanceof Device) {
+                if (listener != null) {
+                    listener.onDeleteDevice((Device)tag);
+                }
+            }
+        }
+    };
+
+    private View.OnClickListener itemListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Object tag = v.getTag();
+            if (tag instanceof Device) {
+                if (listener != null) {
+                    listener.onClickDevice((Device)tag);
+                }
+            }
+        }
+    };
+
+    public interface Listener {
+        void onClickDevice(Device device);
+        void onDeleteDevice(Device device);
+    }
+
+    private Listener listener;
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
     }
 }
