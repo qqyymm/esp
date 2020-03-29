@@ -52,69 +52,10 @@
 
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@color/colorPrimary"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:id="@+id/list_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/empty"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:tint="#aaaaaa"
-                android:src="@drawable/empty"/>
-
-            <TextView
-                android:id="@+id/empty_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:text="未找到设备"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/list_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/error"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:tint="#aaaaaa"
-                android:src="@drawable/error"/>
-
-            <TextView
-                android:id="@+id/error_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:text="加载失败"/>
-
-            <TextView
-                android:id="@+id/retry"
-                style="@style/PrimaryButton"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:text="重试"/>
-
-        </LinearLayout>
+        <com.example.esp.view.StateView
+            android:id="@+id/state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
 

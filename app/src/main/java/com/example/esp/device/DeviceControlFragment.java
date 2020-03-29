@@ -26,6 +26,7 @@ import retrofit2.Response;
 
 /**
  * 设备控制面板
+ * 传入参数为{@link com.example.esp.model.Device},然后向服务端查询设备能力，并展示出对应的功能按钮
  *
  * Created by Ryan Hu on 2020/3/28.
  */
@@ -86,6 +87,10 @@ public class DeviceControlFragment extends Fragment {
         }
     }
 
+    /**
+     * 更新加载状态
+     * @param status
+     */
     private void updateStatus(Status status) {
         if (getView() == null) {
             return;
@@ -116,6 +121,10 @@ public class DeviceControlFragment extends Fragment {
         }
     }
 
+    /**
+     * 更新设备能力
+     * @param deviceAbilities
+     */
     private void updateAbilities(QueryInfraTypeAbilityResult deviceAbilities) {
         if (getView() == null) {
             return;
@@ -150,15 +159,18 @@ public class DeviceControlFragment extends Fragment {
             @Override
             public void onResponse(Call<QueryInfraTypeAbilityResult> call, Response<QueryInfraTypeAbilityResult> response) {
                 if (response.body() != null && response.body().success()) {
+                    //查询成功
                     setStatus(Status.COMPLETE);
                     setAbilities(response.body());
                 } else {
+                    //查询失败
                     setStatus(Status.ERROR);
                 }
             }
 
             @Override
             public void onFailure(Call<QueryInfraTypeAbilityResult> call, Throwable t) {
+                //查询失败
                 setStatus(Status.ERROR);
             }
         });

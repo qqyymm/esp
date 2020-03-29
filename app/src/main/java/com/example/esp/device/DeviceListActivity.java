@@ -17,6 +17,7 @@ import com.example.esp.api.DeviceService;
 import com.example.esp.api.param.DeviceListParam;
 import com.example.esp.api.result.DeviceListResult;
 import com.example.esp.model.Device;
+import com.example.esp.view.StateView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -34,14 +35,11 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
 
     private static final int REQUEST_CODE_ADD_DEVICE = 1;
 
-    private View loading;
     private SmartRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private View headerBack;
     private View headerAddDevice;
-    private View listEmpty;
-    private View listError;
-    private View retry;
+    private StateView stateView;
 
     private DeviceListAdapter adapter;
 
@@ -49,18 +47,14 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
-        loading = findViewById(R.id.loading);
         refreshLayout = findViewById(R.id.refresh);
         recyclerView = findViewById(R.id.device_list);
         headerBack = findViewById(R.id.header_back);
         headerAddDevice = findViewById(R.id.header_add);
-        listEmpty = findViewById(R.id.list_empty);
-        listError = findViewById(R.id.list_error);
-        retry = findViewById(R.id.retry);
+        stateView = findViewById(R.id.state);
 
         headerBack.setOnClickListener(this);
         headerAddDevice.setOnClickListener(this);
-        retry.setOnClickListener(this);
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -83,9 +77,6 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.header_add:
                 startActivityForResult(new Intent(this, AddDeviceActivity.class), REQUEST_CODE_ADD_DEVICE);
-                break;
-            case R.id.retry:
-                loadDeviceList();
                 break;
             default:
                 break;
@@ -118,19 +109,20 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
                 DeviceListResult result = response.body();
                 if (result != null && result.success()) {
                     if (result.device != null && result.device.size() > 0) {
-                        showList(result.device);
+                        stateView.hide();
+                        bind(result.device);
                     } else {
-                        showEmpty();
+                        stateView.showEmpty("重试", () -> loadDeviceList());
                     }
                 } else {
-                    showError();
+                    stateView.showError("重试", () -> loadDeviceList());
                 }
                 refreshLayout.finishRefresh(true);
             }
 
             @Override
             public void onFailure(Call<DeviceListResult> call, Throwable t) {
-                showError();
+                stateView.showError("重试", () -> loadDeviceList());
                 refreshLayout.finishRefresh(false);
             }
         });
@@ -145,12 +137,12 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                showError();
                 List<Device> devices = DeviceManger.getInstance().getAllDevice();
                 if (devices == null || devices.size() == 0) {
-                    showEmpty();
+                    stateView.showEmpty("未找到设备", () -> loadDeviceList());
                 } else {
-                    showList(devices);
+                    stateView.hide();
+                    bind(devices);
                 }
                 refreshLayout.finishRefresh(true);
             }
@@ -161,35 +153,11 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
 
     private void showLoading() {
         if (adapter == null || adapter.getItemCount()== 0) {
-            loading.setVisibility(View.VISIBLE);
-            refreshLayout.setVisibility(View.GONE);
-            listEmpty.setVisibility(View.GONE);
-            listError.setVisibility(View.GONE);
+            stateView.showLoading();
         } else {
+            stateView.hide();
             refreshLayout.autoRefreshAnimationOnly();
         }
-    }
-
-    private void showEmpty() {
-        loading.setVisibility(View.GONE);
-        refreshLayout.setVisibility(View.GONE);
-        listEmpty.setVisibility(View.VISIBLE);
-        listError.setVisibility(View.GONE);
-    }
-
-    private void showError() {
-        loading.setVisibility(View.GONE);
-        refreshLayout.setVisibility(View.GONE);
-        listEmpty.setVisibility(View.GONE);
-        listError.setVisibility(View.VISIBLE);
-    }
-
-    private void showList(List<Device> deviceList) {
-        loading.setVisibility(View.GONE);
-        refreshLayout.setVisibility(View.VISIBLE);
-        listEmpty.setVisibility(View.GONE);
-        listError.setVisibility(View.GONE);
-        bind(deviceList);
     }
 
     private void bind(List<Device> deviceList) {
