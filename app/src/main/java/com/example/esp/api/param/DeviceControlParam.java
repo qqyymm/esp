@@ -1,6 +1,6 @@
 package com.example.esp.api.param;
 
-public class DevicecontrolParam {
+public class DeviceControlParam {
 
     public String actionID;
 

@@ -3,7 +3,6 @@ package com.example.esp.api;
 import com.example.esp.api.param.DeviceBindParam;
 import com.example.esp.api.param.DeviceListParam;
 import com.example.esp.api.param.DeviceRemoveParam;
-import com.example.esp.api.param.DevicecontrolParam;
 import com.example.esp.api.param.QueryDeviceParam;
 import com.example.esp.api.param.DevicerenewtokenParam;
 import com.example.esp.api.param.QueryInfraTypeAbilityParam;
@@ -18,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by Ryan Hu on 2020/3/25.
@@ -56,9 +56,18 @@ public interface DeviceService {
 
     /**
      * 设备控制
+     *
+     * @param actionId 操作类别，0：继电器关闭，2：继电器打开，6：红外控制
+     * @param inst 指令
+     * @param token 授权设备码
+     * @param infraTypeId 设备红外ID
      */
-    @GET("action?actionID=actionID&inst=inst&token=token")
-    Call<DevicecontrolResult> devicecontrol(@Body DevicecontrolParam param);
+    @GET("action")
+    Call<DevicecontrolResult> deviceControl(
+            @Query("actionID") String actionId,
+            @Query("inst") String inst,
+            @Query("token") String token,
+            @Query("infraTypeID") String infraTypeId);
 
     /**
      * 红外型号支持能力查询

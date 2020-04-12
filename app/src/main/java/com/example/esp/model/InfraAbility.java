@@ -15,7 +15,7 @@ public class InfraAbility implements Serializable {
      */
     public String img;
 
-    public String text;
+    public List<String> text;
 
     public String timer;
 

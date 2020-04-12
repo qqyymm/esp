@@ -110,7 +110,7 @@ public class DeviceDetailActivity extends AppCompatActivity implements View.OnCl
         deviceInst.setText(deviceDetail.lastInst);
         //如果设备信息里至少有一个组合设备，显示其控制面板
         if (deviceDetail.unitedevice != null && deviceDetail.unitedevice.size() > 0) {
-            DeviceControlFragment fragment = DeviceControlFragment.create(deviceDetail.unitedevice.get(0));
+            DeviceControlFragment fragment = DeviceControlFragment.create(deviceDetail.unitedevice.get(0), deviceDetail.token);
             getSupportFragmentManager().beginTransaction().replace(R.id.control_container, fragment).commitAllowingStateLoss();
         }
     }

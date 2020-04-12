@@ -97,10 +97,10 @@ public class DeviceListActivity extends AppCompatActivity implements View.OnClic
      * 加载设备列表
      */
     private void loadDeviceList() {
-        if (true) {
-            loadMock();
-            return;
-        }
+//        if (true) {
+//            loadMock();
+//            return;
+//        }
         DeviceListParam param = new DeviceListParam();
         param.sessionID = CurrentUser.sessionId;
         Api.create(DeviceService.class).getDeviceList(param).enqueue(new Callback<DeviceListResult>() {
