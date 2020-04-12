@@ -1,0 +1,116 @@
+{
+	"logoSet": {
+		"off": "icon/logo/resq_r.png",
+		"onl": "icon/logo/resq_b.png",
+		"act": "icon/logo/resq_g.png"
+	},
+	"keyRow": 3,
+	"panelType": "GENE",
+	"dirURL": "icon/",
+	"ONOFF": {
+		"ON": "T_ON",
+		"OFF": "T_OFF"
+	},
+	"keyCol": 3,
+	"errcode": 0,
+	"keyRowNum": [3, 3, 3],
+	"switch": "YN",
+	"keysSet": {
+		"11": {
+			"img": "poweron.png",
+			"text": ["\u7535\u6e90\u5f00"],
+			"timer": "Y",
+			"tag": [""],
+			"inst": ["T_ON"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		},
+		"13": {
+			"img": "time.png",
+			"text": ["\u5b9a\u65f6"],
+			"timer": "N",
+			"tag": [""],
+			"inst": ["timer"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		},
+		"12": {
+			"img": "poweroff.png",
+			"text": ["\u7535\u6e90\u5173"],
+			"timer": "Y",
+			"tag": [""],
+			"inst": ["T_OFF"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		},
+		"21": {
+			"img": "",
+			"text": ["\u4f4e\u6863"],
+			"timer": "Y",
+			"tag": [""],
+			"inst": ["T_LOW"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		},
+		"22": {
+			"img": "",
+			"text": ["\u4e2d\u6863"],
+			"timer": "Y",
+			"tag": [""],
+			"inst": ["T_MID"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		},
+		"23": {
+			"img": "",
+			"text": ["\u5f3a\u6863"],
+			"timer": "Y",
+			"tag": [""],
+			"inst": ["T_HIGH"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		},
+		"33": {
+			"img": "",
+			"text": ["45\u5ea6"],
+			"timer": "Y",
+			"tag": [""],
+			"inst": ["T_TEMP45"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		},
+		"32": {
+			"img": "",
+			"text": ["\u6e29\u5ea6-"],
+			"timer": "Y",
+			"tag": [""],
+			"inst": ["T_TEMPMIN"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		},
+		"31": {
+			"img": "",
+			"text": ["\u6e29\u5ea6+"],
+			"timer": "Y",
+			"tag": [""],
+			"inst": ["T_TEMPADD"],
+			"type": "key",
+			"textColor": "#000000",
+			"instCount": 1
+		}
+	},
+	"components": {},
+	"bgColors": ["#ffffff", "#ffffff"],
+	"keyCount": 9,
+	"_id": "K01018",
+	"display": false,
+	"errmsg": "success"
+}

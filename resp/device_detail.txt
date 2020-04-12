@@ -1,0 +1,62 @@
+{
+	"devStatus": "A002",
+	"devID": "82190000325527752887",
+	"thisMonth": "0.0",
+	"socketOutY_W": "0.0",
+	"agent": null,
+	"lastMonth": "0.0",
+	"position": {
+		"city": "\u5317\u4eac\u5e02",
+		"upTime": "20190716152954",
+		"fence": "1",
+		"wifiMAC": "dc:56:e6:05:68:3a",
+		"area": "\u6d77\u6dc0\u533a",
+		"lat": "39.960443",
+		"lng": "116.356997"
+	},
+	"lastInst": "T_TEMPADD",
+	"unitedevice": [{
+		"logoSet": {
+			"off": "icon/logo/resq_r.png",
+			"onl": "icon/logo/resq_b.png",
+			"act": "icon/logo/resq_g.png"
+		},
+		"infraTypeID": "K01018",
+		"bigType": "KGTH",
+		"devType": "\u70ed\u6c34\u5668",
+		"infraName": "\u7532\u9187\u6696\u6c14",
+		"subWeight": "0",
+		"lastInst": "T_TEMPADD"
+	}],
+	"socketOut_upTime": "",
+	"socketOut_W": "0.0",
+	"devName": "\u5146\u9633\u6696\u6c145277",
+	"errcode": 0,
+	"socketOut_P": "0",
+	"devType": "\u70ed\u6c34\u5668",
+	"token": "c74804ed6fe2c92868dc6cd995b992ddfde3c6b72b1d0e4891a3192291ce99adc892a2286bea",
+	"CDATA": {
+		"AIRTEMP": "1",
+		"stat": "0",
+		"STEAMTEMP": "1",
+		"WATERBACK": "2",
+		"devReady": "1",
+		"SIOPort": "TR02041405",
+		"shidu": "54.0",
+		"switch": "1",
+		"WATEROUT": "2",
+		"workMode": "30",
+		"wendu": "30.0",
+		"DHT": "11",
+		"TEMPSET": "45"
+	},
+	"subRlystatus": {},
+	"instStruct": {
+		"fanSpeed": "\u672a\u77e5",
+		"fanDirection": "\u672a\u77e5",
+		"mode": "\u672a\u77e5",
+		"temperature": "\u672a\u77e5",
+		"onOff": "\u672a\u77e5"
+	},
+	"errmsg": "success"
+}
